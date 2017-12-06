@@ -1,0 +1,38 @@
+.bordered {
+    border: 1px solid black;
+}
+
+
+.cookie-container {
+    position: relative;
+    width: 33%;
+    height: 100vh;
+    float: left;
+    text-justify: center;
+}
+
+.counter {
+   
+    text-align: center;
+}
+
+.cookie {
+    display: block;
+    margin: 0 auto;
+}
+
+img {
+    cursor: pointer;
+}
+
+
+
+
+/* UPGRADES */
+
+.upgrades {
+    display: block;
+    width: 33%;
+    float: left;
+    height: 100vh;
+}
