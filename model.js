@@ -9,7 +9,7 @@ var model = {
                 src: "",
                 production: 0.1,
                 population: 0,
-                bgPosition: "0 0"
+                bg: "url('./img/buildings.png') 0 0"
             },
             grandma: {
                 name: "Grandma",
@@ -17,7 +17,7 @@ var model = {
                 src: "",
                 production: 1,
                 population: 0,
-                bgPosition: "0 -64px"
+                bg: "url('./img/buildings.png') 0 -64px"
             },
             farm: {
                 name: "Farm",
@@ -25,7 +25,7 @@ var model = {
                 src: "",
                 production: 8,
                 population: 0,
-                bgPosition: "0 -192px"
+                bg: "url('./img/buildings.png') 0 -192px"
             },
             mine: {
                 name: "Mine",
@@ -33,7 +33,7 @@ var model = {
                 src: "",
                 production: 47,
                 population: 0,
-                bgPosition: "0 -256px"
+                bg: "url('./img/buildings.png') 0 -256px"
             },
             factory: {
                 name: "Factory",
@@ -41,7 +41,7 @@ var model = {
                 src: "",
                 production: 260,
                 population: 0,
-                bgPosition: "0 -320px"
+                bg: "url('./img/buildings.png') 0 -320px"
             }
         }
 

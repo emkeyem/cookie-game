@@ -10,7 +10,7 @@ ul {
 
 .cookie-container {
     position: relative;
-    width: 33%;
+    width: 50%;
     height: 100vh;
     float: left;
     text-justify: center;
@@ -46,19 +46,20 @@ img {
 
 .upgrades {
     display: block;
-    width: 33%;
+    width: 50%;
     float: left;
     height: 100vh;
     text-align: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    list-style: none;
+ /*    overflow-y: scroll;
+    overflow-x: hidden; */
     
 }
 
 .upgrade {
-    border: 1px solid red;
-    height: 70px;
-    line-height: 70px;
+    border: 0.5px solid black;
+    height: 64px;
+    line-height: 64px;
     position: relative;
     transition: background-color 0.3s;
     cursor: pointer;
@@ -88,11 +89,13 @@ img {
 .content {
     position: relative;
     float: left;
-    width: calc(99% - 64px);
+    width: calc(99% - 64px - 15px);
+    margin-left: 15px;
 }
 
 .content_name {
-    
+    width: 25%;
+    text-align: left;
 }
 .content_owned {
     float: right;

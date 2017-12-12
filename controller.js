@@ -15,5 +15,7 @@ var controller = {
             });
         console.log(productionPerSecond);
         return productionPerSecond;
-    }
+    },
+    
+
 }
