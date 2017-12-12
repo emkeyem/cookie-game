@@ -13,13 +13,9 @@ ul {
     width: 50%;
     height: 100vh;
     float: left;
-    text-justify: center;
-}
-
-.counter {
-   
     text-align: center;
 }
+
 
 .cookie {
     display: block;
@@ -55,7 +51,12 @@ img {
     overflow-x: hidden; */
     
 }
-
+.overlay {
+    position: absolute;
+    height: 64px;
+    width: 100%;
+    background-color: rgba(36, 31, 31, 0.911);
+}
 .upgrade {
     border: 0.5px solid black;
     height: 64px;
@@ -94,8 +95,11 @@ img {
 }
 
 .content_name {
-    width: 25%;
+    position:relative;
+    width: 50%;
     text-align: left;
+    height: 32px;
+    float: left;
 }
 .content_owned {
     float: right;
