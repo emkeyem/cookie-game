@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,15 +9,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
     <link rel="stylesheet" href="./style.css">
 </head>
-<body>
-    <div class="cookie-container bordered">
-        <p class="counter"><span class="cookie-number">0</span> cookies</p>
-        <img class = "cookie" src="./cookie.png" alt="cookie">
-    </div>
-    <div class="upgrades bordered">
 
+<body>
+    <div class="cookie-container ">
+        <p class="counter">
+            <span class="cookie-number">0</span> cookies</p>
+        <img class="cookie" draggable="false" src="img/cookie.png" alt="cookie">
     </div>
+    <ul id="upgrades" class="upgrades ">
+        <li class="upgrade">
+            <div class="upgrade_icon" style="background-position:  128px"></div>
+            <div class="content">
+                <div class="content_name">Name</div>
+                <div class="content_price">100</div>
+                <div class="content_owned">50</div>
+            </div>
+        </li>
+    </ul>
+
     
+    <script src="./controller.js"></script>
+    <script src="./model.js"></script>
+    <script src="./view.js"></script>
     <script src="./index.js"></script>
 </body>
+
 </html>

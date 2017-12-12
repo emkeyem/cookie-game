@@ -1,3 +1,8 @@
+ul {
+    margin:0;
+    padding: 0;
+}
+
 .bordered {
     border: 1px solid black;
 }
@@ -18,11 +23,20 @@
 
 .cookie {
     display: block;
-    margin: 0 auto;
+    margin: 15% auto;
+    width: 50%;
+    transition: all 0.3s ease-out;
 }
+
+.cookie:hover {
+    transform: scale(1.1);
+}
+
+
 
 img {
     cursor: pointer;
+    user-select: none;
 }
 
 
@@ -35,4 +49,51 @@ img {
     width: 33%;
     float: left;
     height: 100vh;
+    text-align: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    
+}
+
+.upgrade {
+    border: 1px solid red;
+    height: 70px;
+    line-height: 70px;
+    position: relative;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    user-select: none;
+}
+
+.upgrade:hover {
+    background-color: rgba(82, 212, 235, 0.5);
+}
+
+.upgrade_icon {
+    background-image: url("./img/buildings.png");
+    width: 64px;
+    height: 64px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    float: left;
+}
+
+.content > * {
+    position: relative;
+    float: left;
+    padding-right: 30px;
+    font-size: 36px;
+}
+.content {
+    position: relative;
+    float: left;
+    width: calc(99% - 64px);
+}
+
+.content_name {
+    
+}
+.content_owned {
+    float: right;
 }
