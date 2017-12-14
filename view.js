@@ -1,30 +1,43 @@
-var upgradesContainer = document.getElementById('upgrades');
-var upgradeElements = document.getElementsByClassName('upgrade');
-var cuuk = document.querySelector(".cookie-number");
-
 var upgradesListView = {
     init: function () {
+        var that = this;
         this.upgListElem = document.getElementById('upgrades');
+        this.upgradesContainer = document.getElementById('upgrades');
+        this.upgradeElements = document.getElementsByClassName('upgrade');
+        this.cuuk = document.querySelector(".cookie-number");
+
+        this.createList();
+        this.addEventListeners(this.upgradeElements);
+        window.setInterval(function () {
+            that.updateCookies();
+        }, 1000);
         this.render();
+
     },
     render: function () {},
     createList: function () {
+        var that = this;
         var obj = controller.getUpgrades();
         var list = "";
         Object
             .keys(obj)
-            .forEach(function (key, index) {
-                var overlay = controller.canAfford(key) ? "" : '<div class="overlay"></div>';
-                list += ` <li data-name="${key}" class="upgrade">${overlay}
-            <div class="upgrade_icon" style="background: ${obj[key].bg}"></div>
-            <div class="content">
-                <div class="content_name">${obj[key].name}</div>
-                <div class="content_price">${obj[key].price}</div>
-                <div class="content_owned">${obj[key].population}</div>
-            </div>
-        </li>`
+            .forEach(function (key) {
+                // if you can't afford the upgrade, element gets color overlay
+                var overlay = controller.canAffordUpgrade(key)
+                    ? ""
+                    : '<div class="overlay"></div>';
+
+                list += `
+                <li data-name="${key}" class="upgrade">${overlay}
+                    <div class="upgrade_icon" style="background: ${obj[key].bg}"></div>
+                    <div class="content">
+                        <div class="content_name">${obj[key].name}</div>
+                        <div class="content_price">${obj[key].price}</div>
+                        <div class="content_owned">${obj[key].population}</div>
+                    </div>
+                </li>`
                 // productionPerSecond += obj[key].population * obj[key].production;
-                upgradesContainer.innerHTML = list;
+                that.upgradesContainer.innerHTML = list;
             })
     },
     addEventListeners: function (list) {
@@ -36,29 +49,27 @@ var upgradesListView = {
                     var price = this.getElementsByClassName("content_price")[0];
                     var population = this.getElementsByClassName("content_owned")[0];
                     var name = this.dataset.name;
-                    // model.upgrades[name].population += 1;
-                    // model.upgrades[name].price *= 1.15;
+
                     controller.buyUpgrade(name);
-                    cuuk.innerHTML = controller.getCookies()
-                    price.innerHTML = Math.floor(model.upgrades[name].price);
-                    population.innerHTML = Math.floor(model.upgrades[name].population);
+                    that.cuuk.innerHTML = controller.getCookies(name)
+                    price.innerHTML = controller.getPrice(name);
+                    population.innerHTML = controller.getPopulation(name);
                     that.updateCookiesPerSec(model);
                 }, false);
         }
     },
-    updateCookiesPerSec: function() {
-        var cookiesPerSecond = document.querySelector(".cookies-per-second");
-        cookiesPerSecond.innerHTML = controller.getProductionPerSecond(model);
+    toggleOverlay: function(){
+        
     },
-    updateCookies: function() {
-        controller.setCookies(model);
-        cuuk.innerHTML = controller.getCookies();
+    updateCookiesPerSec: function () {
+        var cookiesPerSecond = document.querySelector(".cookies-per-second");
+        cookiesPerSecond.innerHTML = controller.getProductionPerSecond();
+    },
+    updateCookies: function () {
+        controller.addProductionCookies();
+        this.cuuk.innerHTML = controller.getCookies();
     }
-    
+
 }
 
-upgradesListView.createList();
-upgradesListView.addEventListeners(upgradeElements);
-window.setInterval(function(){
-    upgradesListView.updateCookies();
-  }, 1000);
+upgradesListView.init();
