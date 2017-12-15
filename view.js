@@ -6,7 +6,10 @@ var upgradesListView = {
         this.upgradeElements = document.getElementsByClassName('upgrade');
         this.cuuk = document.querySelector(".cookie-number");
 
+        this.updateCookies();
         this.createList();
+
+
         this.addEventListeners(this.upgradeElements);
         window.setInterval(function () {
             that.updateCookies();
@@ -39,6 +42,7 @@ var upgradesListView = {
                 // productionPerSecond += obj[key].population * obj[key].production;
                 that.upgradesContainer.innerHTML = list;
             })
+            console.log("crrating view");
     },
     addEventListeners: function (list) {
         that = this;
@@ -72,4 +76,4 @@ var upgradesListView = {
 
 }
 
-upgradesListView.init();
+// upgradesListView.init();

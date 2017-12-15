@@ -17,8 +17,9 @@ request.onsuccess = function(event) {
  */
 
 
-
-
+ var begin = function() {
+   
+ }
 var dbElements = {
   cookies: {
     name: "cookies",
@@ -29,7 +30,6 @@ var dbElements = {
     value: "upgrades"
   }
 };
-
 
 var getDbItem = function (name, value) {
   var obj = {};
@@ -46,9 +46,7 @@ openRequest.onupgradeneeded = function (e) {
   var db = e.target.result;
   console.log('running onupgradeneeded');
   if (!db.objectStoreNames.contains('store')) {
-    var storeOS = db.createObjectStore('store', {
-      keyPath: "name"
-    });
+    var storeOS = db.createObjectStore('store', {keyPath: "name"});
   }
 };
 
@@ -58,11 +56,12 @@ openRequest.onsuccess = function (e) {
   console.log(db);
 
   if (db.objectStoreNames.contains('store')) {
-    getItem(dbElements.cookies, elemHandler);
-  }
-  addAll();
-};
+    // getAll();
+    
+  } else {
 
+  }
+};
 
 openRequest.onerror = function (e) {
   console.dir(e);
@@ -87,32 +86,29 @@ function getItem(elem, elemHandler) {
   var transaction = db.transaction(['store'], 'readwrite');
   var store = transaction.objectStore('store');
   var request = store.get(elem.name);
-  
 
   request.onsuccess = function (event) {
     var result = event.target.result;
     elemHandler(result);
   };
 
-  
- console.log(request);
+  transaction.oncomplete = function (event) {
+     upgradesListView.init();
+  };
+
 }
 
-function updateItem() {
-  
-}
-
-function elemHandler(item){
-  console.log(item);
+function elemHandler(item) {
+  model[item.name] = item.value;
+  console.log("model item ", model[item.name]);
 }
 
 function addAll() {
-  addItem({
-    name: "upgrades",
-    value: model.upgrades
-  });
-  addItem({
-    name: "cookies",
-    value: model.cookieCount
-  });
+  addItem({name: "upgrades", value: model.upgrades});
+  addItem({name: "cookies", value: model.cookieCount});
+}
+
+function getAll() {
+  getItem(dbElements.cookies, elemHandler);
+  getItem(dbElements.upgrades, elemHandler);
 }
