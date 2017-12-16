@@ -42,7 +42,7 @@ var controller = {
         if (controller.getCookies() >= model.upgrades[upgrade].price) {
             model.cookieCount -= model.upgrades[upgrade].price;
             model.upgrades[upgrade].population += 1;
-            model.upgrades[upgrade].price *= 1.15;
+            model.upgrades[upgrade].price =  Math.floor(model.upgrades[upgrade].price * 1.15);
         }
     },
     // check if you can afford the upgrade

@@ -5,7 +5,7 @@ var model = {
     upgrades: {
         cursor: {
             name: "Cursor",
-            price: 15,
+            price: 25,
             src: "",
             production: 0.1,
             population: 0,

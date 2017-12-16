@@ -4,10 +4,11 @@ var upgradesListView = {
         this.upgListElem = document.getElementById('upgrades');
         this.upgradesContainer = document.getElementById('upgrades');
         this.upgradeElements = document.getElementsByClassName('upgrade');
-        this.cuuk = document.querySelector(".cookie-number");
+        this.cookiesNumber = document.querySelector(".cookie-number");
 
         this.updateCookies();
         this.createList();
+        this.updateCookiesPerSec();
 
 
         this.addEventListeners(this.upgradeElements);
@@ -55,7 +56,7 @@ var upgradesListView = {
                     var name = this.dataset.name;
 
                     controller.buyUpgrade(name);
-                    that.cuuk.innerHTML = controller.getCookies(name)
+                    that.cookiesNumber.innerHTML = controller.getCookies(name)
                     price.innerHTML = controller.getPrice(name);
                     population.innerHTML = controller.getPopulation(name);
                     that.updateCookiesPerSec(model);
@@ -71,7 +72,7 @@ var upgradesListView = {
     },
     updateCookies: function () {
         controller.addProductionCookies();
-        this.cuuk.innerHTML = controller.getCookies();
+        this.cookiesNumber.innerHTML = controller.getCookies();
     }
 
 }
