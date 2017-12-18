@@ -1,5 +1,4 @@
 
-
 var db;
 var store_name = "store";
 var dbName = "cookie_clicker";
@@ -18,12 +17,11 @@ var begin = function () {
     window.alert("Your browser doesn't support a stable version of IndexedDB. Such and such featur" +
         "e will not be available.");
   }
-  
+
   var openRequest = indexedDB.open(dbName, 1);
 
   openRequest.onupgradeneeded = function (e) {
     var db = e.target.result;
-    // console.log('running onupgradeneeded');
     if (!db.objectStoreNames.contains(store_name)) {
       var store = db.createObjectStore(store_name, {keyPath: "name"});
       store.transaction.oncomplete = function (event) {
@@ -31,8 +29,8 @@ var begin = function () {
         var store = db
           .transaction(store_name, "readwrite")
           .objectStore(store_name);
-        for (var key in model) {
-          store.add(createDbObject(key, model))
+        for (var key in Model) {
+          store.add(createDbObject(key, Model))
         }
       };
     }
@@ -41,15 +39,12 @@ var begin = function () {
   openRequest.onsuccess = function (e) {
     // console.log('running onsuccess');
     db = e.target.result;
-    console.log(db);
-
     if (db.objectStoreNames.contains(store_name)) {
-      // addAll();
       getAll();
     } else {
-      upgradesListView
+      View
         .init
-        .call(upgradesListView);
+        .call(View);
     }
   };
 
@@ -65,11 +60,11 @@ function getAll() {
     objectStore
       .getAll()
       .onsuccess = function (event) {
-      model.cookieCount = event.target.result[0].value;
-      model.upgrades = event.target.result[1].value;
-      upgradesListView
+      Model.cookieCount = event.target.result[0].value;
+      Model.upgrades = event.target.result[1].value;
+      View
         .init
-        .call(upgradesListView);
+        .call(View);
     };
   }
 }
@@ -77,8 +72,8 @@ function getAll() {
 function updateDB() {
   var objectStore = db.transaction([store_name], "readwrite").objectStore(store_name);
 
-  for (var key in model) {
-    update(key, model, objectStore);
+  for (var key in Model) {
+    update(key, Model, objectStore);
   }
 
 }
@@ -95,7 +90,7 @@ function update(key, model, objectStore) {
     requestUpdate.onerror = function (event) {
       // Do something with the error
     };
-   
+
   };
 }
 

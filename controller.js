@@ -1,61 +1,61 @@
-var controller = {
+const controller = {
     init: function () {
-        upgradesListView.init();
+        View.init();
     },
     getUpgrades: function () {
-        return model.upgrades;
+        return Model.upgrades;
     },
     getName: function(name) {
-        return model.upgrades[name].name;
+        return Model.upgrades[name].name;
     },
     getCookies: function () {
-        return Math.floor(model.cookieCount);
+        return Math.floor(Model.cookieCount);
     },
     getBackground: function(name) {
-        return model.upgrades[name].bg;
+        return Model.upgrades[name].bg;
     },
     getPopulation: function (name) {
-        return model.upgrades[name].population;
+        return Model.upgrades[name].population;
     },
     getPrice: function (name) {
-        return Math.floor(model.upgrades[name].price);
+        return Math.floor(Model.upgrades[name].price);
     },
     getProduction: function (name) {
-        return model.upgrades[name].production;
+        return Model.upgrades[name].production;
     },
     // add all cookies manufactured by upgrades (in one second)
     addProductionCookies: function () {
-        model.cookieCount += this.getTotalProductionPerSecond(model) / 10;
+        Model.cookieCount += this.getTotalProductionPerSecond(Model) / 10;
     },
     // return number of cookies manufactured by all upgrades in one second
     getTotalProductionPerSecond: function () {
         var productionPerSecond = 0;
         var that = this;
         Object
-            .keys(model.upgrades)
+            .keys(Model.upgrades)
             .forEach(function (key, index) {
                 productionPerSecond += that.getProductionPerSecond(key);
             });
         return Math.round(productionPerSecond * 10) / 10;
     },
     getProductionPerSecond: function(name) {
-        return model.upgrades[name].population * model.upgrades[name].production;
+        return Model.upgrades[name].population * Model.upgrades[name].production;
     },
     // buy upgrade, update amount and price of certain upgrade, update number of
     // cookies
     buyUpgrade: function (upgrade) {
-        if (controller.getCookies() >= model.upgrades[upgrade].price) {
-            model.cookieCount -= model.upgrades[upgrade].price;
-            model.upgrades[upgrade].population += 1;
-            model.upgrades[upgrade].price = Math.floor(model.upgrades[upgrade].price * 1.15);
+        if (controller.getCookies() >= Model.upgrades[upgrade].price) {
+            Model.cookieCount -= Model.upgrades[upgrade].price;
+            Model.upgrades[upgrade].population += 1;
+            Model.upgrades[upgrade].price = Math.floor(Model.upgrades[upgrade].price * 1.15);
         }
     },
     // check if you can afford the upgrade
     canAffordUpgrade(upgradeName) {
-        return controller.getCookies() >= model.upgrades[upgradeName].price;
+        return controller.getCookies() >= Model.upgrades[upgradeName].price;
     },
     // add single cookie from click
     addCookie: function () {
-        model.cookieCount++;
+        Model.cookieCount++;
     }
 }

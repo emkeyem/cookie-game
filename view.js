@@ -1,4 +1,4 @@
-var upgradesListView = {
+const View = {
     init: function () {
         var that = this;
         this.upgListElem = document.getElementById('upgrades');
@@ -6,6 +6,7 @@ var upgradesListView = {
         this.upgradeElements = document.getElementsByClassName('upgrade');
         this.cookiesNumber = document.querySelector(".cookie-number");
         this.cookie = document.querySelector(".cookie-container .cookie");
+
 
         this.updateCookiesPerSec();
         this.createList(controller.getUpgrades());
@@ -26,7 +27,6 @@ var upgradesListView = {
     render: function () {},
     createList: function (obj) {
         var that = this;
-        // var obj = ;
         var list = "";
         Object
             .keys(obj)

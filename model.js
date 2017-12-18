@@ -1,4 +1,4 @@
-var model = {
+const Model = {
     cookieCount: 0,
 
     upgrades: {
