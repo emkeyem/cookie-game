@@ -13,24 +13,20 @@
 <body>
     <div class="cookie-container ">
         <p class="counter">
-            <p><span class="cookie-number ">0</span> cookies</p>
-            <p><span class="cookies-per-second">0</span> cookies per second</p>
+            <p>
+                <span class="cookie-number ">0</span> cookies</p>
+            <p>
+                <span class="cookies-per-second">0</span> cookies per second</p>
         </p>
         <img class="cookie" draggable="false" src="img/cookie.png" alt="cookie">
-        <button onclick="updateDB()" class = "save">Save progress</button>
+        <button onclick="updateDB() " class="save">Save progress</button>
     </div>
     <ul id="upgrades" class="upgrades ">
         <li class="upgrade">
-            <div class="upgrade_icon" style="background-position:  128px"></div>
-            <div class="content">
-                <div class="content_name">Name</div>
-                <div class="content_price">100</div>
-                <div class="content_owned">50</div>
-            </div>
         </li>
     </ul>
 
-    
+
 
     <script src="./db.js"></script>
     <script src="./model.js"></script>

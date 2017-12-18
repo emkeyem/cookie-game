@@ -1,6 +1,6 @@
 var model = {
-    multiplier: 1.15,
-    cookieCount: 11110,
+    // multiplier: 1.15,
+    cookieCount: 0,
 
     upgrades: {
         cursor: {

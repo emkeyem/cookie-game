@@ -5,7 +5,7 @@ var cookieNumber = document.querySelector(".cookie-number");
 
 var addCookie = function() {
     model.cookieCount += 1;
-    cookieNumber.innerHTML = Math.round(model.cookieCount*10)/10;
+    cookieNumber.innerHTML = controller.getCookies();
 }
 
 cookie.addEventListener('click', addCookie);
