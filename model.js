@@ -1,5 +1,4 @@
 var model = {
-    // multiplier: 1.15,
     cookieCount: 0,
 
     upgrades: {

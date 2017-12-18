@@ -5,11 +5,12 @@ var upgradesListView = {
         this.upgradesContainer = document.getElementById('upgrades');
         this.upgradeElements = document.getElementsByClassName('upgrade');
         this.cookiesNumber = document.querySelector(".cookie-number");
+        this.cookie = document.querySelector(".cookie-container .cookie");
 
-        this.updateCookies();
-        this.createList(controller.getUpgrades());
         this.updateCookiesPerSec();
+        this.createList(controller.getUpgrades());
 
+        this.cookie.addEventListener('click', this.addClickCookie.bind(this));
         this.addEventListeners(this.upgradeElements);
         window.setInterval(function () {
             that.updateCookies();
@@ -40,9 +41,9 @@ var upgradesListView = {
                     <div class="upgrade_icon" style="background: ${controller.getBackground(key)}"></div>
                     <div class="content">
                         <div class="content_name">${controller.getName(key)}</div>
-                        <div class="content_price">${controller.getPrice(key)}</div>
+                        <div class="content_price">${controller.getPrice(key)} c</div>
                         <div class="content_owned">${controller.getPopulation(key)}</div>
-                        <div class="content_production-per-second">${controller.getProductionPerSecond(key)} c/s</div>
+                        <div class="content_production-per-second">${controller.getProductionPerSecond(key).toFixed(1)} c/s</div>
                     </div>
                 </li>`
                 that.upgradesContainer.innerHTML = list;
@@ -61,10 +62,10 @@ var upgradesListView = {
 
                     controller.buyUpgrade(name);
                     that.cookiesNumber.innerHTML = controller.getCookies(name)
-                    price.innerHTML = controller.getPrice(name);
+                    price.innerHTML = controller.getPrice(name) + " c";
                     population.innerHTML = controller.getPopulation(name);
-                    productionPerSecond.innerHTML = (controller.getPopulation(name) * controller.getProduction(name)).toFixed(1) + " c/s";
-                    that.updateCookiesPerSec(model);
+                    productionPerSecond.innerHTML = (controller.getProductionPerSecond(name)).toFixed(1) + " c/s";
+                    that.updateCookiesPerSec();
                 }, false);
         }
     },
@@ -89,6 +90,10 @@ var upgradesListView = {
     },
     updateCookies: function () {
         controller.addProductionCookies();
+        this.cookiesNumber.innerHTML = controller.getCookies();
+    },
+    addClickCookie: function() {
+        controller.addCookie();
         this.cookiesNumber.innerHTML = controller.getCookies();
     }
 
