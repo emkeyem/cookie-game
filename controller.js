@@ -1,6 +1,6 @@
 const controller = {
     init: function () {
-        View.init();
+        dataBase.init();
     },
     getUpgrades: function () {
         return Model.upgrades;
@@ -30,11 +30,10 @@ const controller = {
     // return number of cookies manufactured by all upgrades in one second
     getTotalProductionPerSecond: function () {
         var productionPerSecond = 0;
-        var that = this;
         Object
             .keys(Model.upgrades)
-            .forEach(function (key, index) {
-                productionPerSecond += that.getProductionPerSecond(key);
+            .forEach(  (key, index) => {
+                productionPerSecond += this.getProductionPerSecond(key);
             });
         return Math.round(productionPerSecond * 10) / 10;
     },
@@ -59,3 +58,5 @@ const controller = {
         Model.cookieCount++;
     }
 }
+
+controller.init();

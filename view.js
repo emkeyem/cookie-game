@@ -1,6 +1,5 @@
 const View = {
     init: function () {
-        var that = this;
         this.upgListElem = document.getElementById('upgrades');
         this.upgradesContainer = document.getElementById('upgrades');
         this.upgradeElements = document.getElementsByClassName('upgrade');
@@ -11,50 +10,62 @@ const View = {
         this.updateCookiesPerSec();
         this.createList(controller.getUpgrades());
 
-        this.cookie.addEventListener('click', this.addClickCookie.bind(this));
+        this.cookie.addEventListener('click', () => this.addClickCookie());
         this.addEventListeners(this.upgradeElements);
-        window.setInterval(function () {
-            that.updateCookies();
-            Object
-                .keys(controller.getUpgrades())
-                .forEach(function (key) {
-                    that.toggleOverlay(key);
+
+        // update cookis number evey 100ms to keep counter smooth
+        window.setInterval( () => {
+            this.updateCookies();
+         
+            // 
+            Object.keys(controller.getUpgrades())
+                .forEach((key) => {
+                    this.toggleOverlay(key);
                 })
         }, 1000 / 10);
-        this.render();
 
     },
-    render: function () {},
+
+    // create full list of upgrades
     createList: function (obj) {
-        var that = this;
         var list = "";
         Object
             .keys(obj)
-            .forEach(function (key) {
-                // if you can't afford the upgrade, element gets color overlay
-                var overlay = controller.canAffordUpgrade(key)
-                    ? ""
-                    : "overlay";
-
-                list += `
-                <li data-name="${key}" class="upgrade ${overlay}">
-                    <div class="upgrade_icon" style="background: ${controller.getBackground(key)}"></div>
-                    <div class="content">
-                        <div class="content_name">${controller.getName(key)}</div>
-                        <div class="content_price">${controller.getPrice(key)} c</div>
-                        <div class="content_owned">${controller.getPopulation(key)}</div>
-                        <div class="content_production-per-second">${controller.getProductionPerSecond(key).toFixed(1)} c/s</div>
-                    </div>
-                </li>`
-                that.upgradesContainer.innerHTML = list;
+            .forEach(key => {
+                list += this.createListItem(key);
             })
+        this.upgradesContainer.innerHTML = list;
     },
+
+    // create single upgrades list item
+    createListItem: function(key) {
+        var listItem = "";
+        // if you can't afford the upgrade, element gets color overlay
+        var overlay = controller.canAffordUpgrade(key)
+            ? ""
+            : "overlay";
+
+        listItem = `
+            <li data-name="${key}" class="upgrade ${overlay}">
+                <div class="upgrade_icon" style="background: ${controller.getBackground(key)}"></div>
+                <div class="content">
+                    <div class="content_name">${controller.getName(key)}</div>
+                    <div class="content_price">${controller.getPrice(key)} c</div>
+                    <div class="content_owned">${controller.getPopulation(key)}</div>
+                    <div class="content_production-per-second">${controller
+            .getProductionPerSecond(key)
+            .toFixed(1)} c/s</div>
+                </div>
+            </li>`
+        return listItem;
+
+    },
+    // update view of list item on click
     addEventListeners: function (list) {
         that = this;
         for (i = 0; i < list.length; i++) {
             list[i]
                 .addEventListener('click', function () {
-
                     var price = this.querySelector(".content_price");
                     var population = this.querySelector(".content_owned");
                     var productionPerSecond = this.querySelector(".content_production-per-second");
@@ -69,6 +80,7 @@ const View = {
                 }, false);
         }
     },
+    // if you can afford upgrade, overlay is on, if not, overlay is off
     toggleOverlay: function (key) {
         var overlayCss = "overlay";
         var upgrade = document.querySelector(`[data-name=${key}]`)
@@ -92,7 +104,7 @@ const View = {
         controller.addProductionCookies();
         this.cookiesNumber.innerHTML = controller.getCookies();
     },
-    addClickCookie: function() {
+    addClickCookie: function () {
         controller.addCookie();
         this.cookiesNumber.innerHTML = controller.getCookies();
     }
