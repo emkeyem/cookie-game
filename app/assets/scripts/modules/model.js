@@ -8,7 +8,7 @@ const Model = {
             src: "",
             production: 0.1,
             population: 0,
-            bg: "url('./img/buildings.png') 0 0"
+            bg: "url('./assets/img/buildings.png') 0 0"
         },
         grandma: {
             name: "Grandma",
@@ -45,4 +45,6 @@ const Model = {
     }
 
 }
+
+export default Model;
 
