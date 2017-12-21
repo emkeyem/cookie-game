@@ -9,6 +9,7 @@ const Model = {
             production: 0.1,
             population: 0,
             bg: "url('./assets/img/buildings.png') 0 0"
+           
         },
         grandma: {
             name: "Grandma",
@@ -16,7 +17,7 @@ const Model = {
             src: "",
             production: 1,
             population: 0,
-            bg: "url('./img/buildings.png') 0 -64px"
+            bg: "url('./assets/img/buildings.png') 0 -64px"
         },
         farm: {
             name: "Farm",
@@ -24,7 +25,7 @@ const Model = {
             src: "",
             production: 8,
             population: 0,
-            bg: "url('./img/buildings.png') 0 -192px"
+            bg: "url('./assets/img/buildings.png') 0 -192px"
         },
         mine: {
             name: "Mine",
@@ -32,7 +33,7 @@ const Model = {
             src: "",
             production: 47,
             population: 0,
-            bg: "url('./img/buildings.png') 0 -256px"
+            bg: "url('./assets/img/buildings.png') 0 -256px"
         },
         factory: {
             name: "Factory",
@@ -40,7 +41,7 @@ const Model = {
             src: "",
             production: 260,
             population: 0,
-            bg: "url('./img/buildings.png') 0 -320px"
+            bg: "url('./assets/img/buildings.png') 0 -320px"
         }
     }
 
