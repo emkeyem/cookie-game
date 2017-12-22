@@ -13,7 +13,6 @@ class View  {
 
         this.updateCookiesPerSec();
         this.createList(that.controller.getUpgrades());
-console.log(this);
         this.cookie.addEventListener('click', () => this.addClickCookie());
         this.addEventListeners(this.upgradeElements);
 

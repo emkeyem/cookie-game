@@ -5,4 +5,4 @@ Simplified version of cookie clicker game
 
 ## Getting Started
 
-Just open app/index.html, enjoy
+Open app/index.html, enjoy

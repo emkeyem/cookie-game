@@ -204,16 +204,7 @@ var DB = function () {
       var openRequest = indexedDB.open(this.dbName, 1);
 
       openRequest.onupgradeneeded = function (e) {
-        that.db = e.target.result;
-        if (!that.db.objectStoreNames.contains(that.storeName)) {
-          var store = that.db.createObjectStore(that.storeName, { keyPath: "name" });
-          store.transaction.oncomplete = function (event) {
-            var store = that.db.transaction(that.storeName, "readwrite").objectStore(that.storeName);
-            for (var key in that.model) {
-              store.add(that.createDbObject(key, that.model));
-            }
-          };
-        }
+        that.createStore.call(that, e.target.result, that.storeName, that.model);
       };
 
       openRequest.onsuccess = function (e) {
@@ -231,6 +222,21 @@ var DB = function () {
       };
     }
   }, {
+    key: "createStore",
+    value: function createStore(database, storename, model) {
+      var that = this;
+      this.db = database;
+      if (!this.db.objectStoreNames.contains(storename)) {
+        var store = this.db.createObjectStore(storename, { keyPath: "name" });
+        store.transaction.oncomplete = function (event) {
+          var store = that.db.transaction(storename, "readwrite").objectStore(storename);
+          for (var key in model) {
+            store.add(that.createDbObject(key, model));
+          }
+        };
+      }
+    }
+  }, {
     key: "isIndexDbsupported",
     value: function isIndexDbsupported() {
       window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -241,7 +247,6 @@ var DB = function () {
   }, {
     key: "getAll",
     value: function getAll() {
-
       var that = this;
       var transaction = that.db.transaction([that.storeName], 'readwrite');
       var objectStore = transaction.objectStore(that.storeName);
@@ -450,7 +455,6 @@ var View = function () {
 
             this.updateCookiesPerSec();
             this.createList(that.controller.getUpgrades());
-            console.log(this);
             this.cookie.addEventListener('click', function () {
                 return _this.addClickCookie();
             });
