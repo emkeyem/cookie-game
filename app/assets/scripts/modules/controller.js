@@ -27,7 +27,7 @@ class Controller {
     getProduction(name) {
         return this.Model.upgrades[name].production;
     }
-    // add all cookies manufactured by upgrades (in one second)
+    // add all cookies manufactured by upgrades (in 100 miliseconds)
     addProductionCookies() {
         this.Model.cookieCount += this.getTotalProductionPerSecond(this.Model) / 10;
     }
